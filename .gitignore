@@ -3,12 +3,23 @@
 
 # Keep Git control files.
 !.gitignore
+!README.md
 
-# Track project skills and their source lockfile.
+# Track only the course-development skills.
 !.agents/
 !.agents/skills/
-!.agents/skills/**
-!skills-lock.json
+!.agents/skills/topic-analysis/
+!.agents/skills/topic-analysis/**
+!.agents/skills/course-objectives/
+!.agents/skills/course-objectives/**
+!.agents/skills/course-structure/
+!.agents/skills/course-structure/**
+!.agents/skills/content-organization/
+!.agents/skills/content-organization/**
+!.agents/skills/process-design/
+!.agents/skills/process-design/**
+!.agents/skills/expert-interview-outline/
+!.agents/skills/expert-interview-outline/**
 
 # Ignore macOS metadata anywhere.
 .DS_Store
