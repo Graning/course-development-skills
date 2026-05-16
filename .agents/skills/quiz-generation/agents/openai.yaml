@@ -1,0 +1,4 @@
+interface:
+  display_name: "试题生成"
+  short_description: "根据课程目标和重难点生成培训考试题与答案解析"
+  default_prompt: "使用 $quiz-generation，根据课程主题、课程目标、核心教学内容、教学重难点和试卷要求生成课后考试题：包含试卷说明、试题部分、答案与解析，并核算题量、分值和难度比例。"

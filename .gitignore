@@ -20,6 +20,8 @@
 !.agents/skills/process-design/**
 !.agents/skills/expert-interview-outline/
 !.agents/skills/expert-interview-outline/**
+!.agents/skills/quiz-generation/
+!.agents/skills/quiz-generation/**
 
 # Ignore macOS metadata anywhere.
 .DS_Store
