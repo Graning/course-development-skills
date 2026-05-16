@@ -1,0 +1,4 @@
+interface:
+  display_name: "结构搭建"
+  short_description: "搭建课程模块结构、层级逻辑、内容顺序和取舍边界"
+  default_prompt: "使用 $course-structure，根据课程目标、课题分析、来源材料或零散内容搭建或优化课程结构：选择结构逻辑、分组模块、排列内容并校验层级。"

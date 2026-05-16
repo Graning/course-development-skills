@@ -1,0 +1,4 @@
+interface:
+  display_name: "课题分析"
+  short_description: "拆解培训课题的业务目标、学员场景、问题与内容边界"
+  default_prompt: "使用 $topic-analysis，在课程设计前分析培训课题：澄清业务目标、学员角色、工作场景、关键行为、痛点问题、KAS 内容、范围边界和课程启示。"

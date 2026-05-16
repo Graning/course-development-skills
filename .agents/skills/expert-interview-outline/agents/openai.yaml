@@ -1,0 +1,4 @@
+interface:
+  display_name: "专家访谈提纲"
+  short_description: "设计专家访谈提纲并萃取课程开发所需经验素材"
+  default_prompt: "使用 $expert-interview-outline，根据最终版课题分析表、课程目标、课程结构和访谈对象，设计可复制到 Excel 的专家访谈提纲，包含7步法环节、课程模块/目标/痛点映射、核心必问/拓展选问、STAR追问话术和记录栏。"

@@ -1,0 +1,4 @@
+interface:
+  display_name: "课程目标"
+  short_description: "编写并校准可衡量的课程学习目标与验收标准"
+  default_prompt: "使用 $course-objectives，根据课题、学员场景、绩效差距、课程大纲或来源材料，编写、改写并校验可衡量的课程学习目标。"

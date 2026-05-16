@@ -1,0 +1,4 @@
+interface:
+  display_name: "过程设计"
+  short_description: "把课程内容转化为课堂流程活动和衡量证据"
+  default_prompt: "使用 $process-design，根据课程目标、结构模块和内容组织结果设计教学过程：安排流程、方法、活动、时间、讲师/学员动作、反馈和学习衡量。"

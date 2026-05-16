@@ -1,0 +1,15 @@
+# Ignore everything by default; this repo is for managing Codex skills.
+*
+
+# Keep Git control files.
+!.gitignore
+
+# Track project skills and their source lockfile.
+!.agents/
+!.agents/skills/
+!.agents/skills/**
+!skills-lock.json
+
+# Ignore macOS metadata anywhere.
+.DS_Store
+**/.DS_Store

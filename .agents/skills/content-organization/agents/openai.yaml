@@ -1,0 +1,4 @@
+interface:
+  display_name: "内容组织"
+  short_description: "筛选归类排序课程内容并建立知识结构和表达逻辑"
+  default_prompt: "使用 $content-organization，根据课程目标、课题分析、结构模块和来源材料组织培训内容：裁剪内容、归类知识与经验、梳理知识结构、建立表达逻辑并标注应用价值。"
