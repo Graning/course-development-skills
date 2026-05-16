@@ -18,13 +18,31 @@
 
 ## Orchestrator Agent
 
-本仓库提供一个课程开发统筹 Agent：
+本仓库提供一个课程开发统筹 Agent，参考 POMASA 的“Blueprint + 阶段流水线 + 文件数据总线 + 可追溯产物”思路设计：
 
 ```text
 .agents/agents/course-development-orchestrator.md
 ```
 
 它的角色是主动判断当前课程开发阶段，并选择合适的 skill 组合推进工作。适合在用户只给出模糊需求、零散材料、专家经验或课程草稿时使用。
+
+Agent 会在完整课程开发任务中维护运行工作区：
+
+```text
+workspace/course-development/{COURSE_ID}/
+├── 00.project-brief.md
+├── 01.topic-analysis.md
+├── 02.course-objectives.md
+├── 03.course-structure.md
+├── 04.content-organization.md
+├── 05.process-design.md
+├── 06.expert-interview-outline.md
+├── 07.quiz-generation.md
+├── lineage-map.md
+└── wip-notes.md
+```
+
+其中 `lineage-map.md` 用于维护目标、模块、内容、活动、访谈问题和试题之间的追溯关系。
 
 Agent 会按下面逻辑统筹：
 
@@ -36,7 +54,7 @@ Agent 会按下面逻辑统筹：
 - 需要专家经验：调用 `$expert-interview-outline`
 - 需要学习评估：调用 `$quiz-generation`
 
-它不会机械调用全部 skill，而是根据当前任务选择最小但足够的组合。
+它不会机械调用全部 skill，而是根据当前任务选择最小但足够的组合；调用 skill 时也不会用自己的摘要替代 skill，而是以对应 `SKILL.md` 的完整规则为准。
 
 ## Recommended Workflow
 
