@@ -1,6 +1,6 @@
 # Course Development Skills
 
-这个仓库用于管理课程开发流程相关的 Codex skills。当前上传范围只包含课程开发与学习评估所需的 skill，不包含 PPT / 演示文稿相关 skill。
+这个仓库用于管理课程开发流程相关的 Codex skills。当前上传范围只包含课程开发与学习评估所需的 skill。
 
 ## Skills
 
@@ -25,15 +25,6 @@
 如需从专家经验中萃取课程内容，可在完成课程结构后使用 `expert-interview-outline`，再把访谈结果回填到内容组织和教学过程设计中。
 
 如需检验学习效果，可在课程目标、内容组织和教学过程稳定后使用 `quiz-generation` 生成课后考试题或随堂测试题。
-
-## Repository Scope
-
-已排除的 skill：
-
-- `html-ppt`
-- `guizang-ppt-skill`
-
-这两个 PPT 相关 skill 可以继续保留在本地使用，但不会进入本仓库的版本管理和 GitHub 上传范围。
 
 ## Update
 
