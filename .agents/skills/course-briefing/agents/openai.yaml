@@ -1,0 +1,4 @@
+interface:
+  display_name: "说课"
+  short_description: "生成课程设计说课稿和评审汇报口径"
+  default_prompt: "使用 $course-briefing，根据课题分析、课程目标、课程结构、内容组织、过程设计和评估方案生成说课稿：说明课程背景、目标、结构、内容取舍、教学过程、评估方式和设计亮点。"

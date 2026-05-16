@@ -13,6 +13,7 @@
 | 3 | `course-structure` | 结构搭建 | 把目标、任务和素材整理为清晰的课程模块、层级和逻辑顺序 | 一级/二级模块表、承接逻辑、内容取舍 |
 | 4 | `content-organization` | 内容组织 | 根据目标和结构筛选、归类、裁剪和排序课程内容 | 内容取舍表、内容分类表、模块内容组织表、案例/练习建议 |
 | 5 | `process-design` | 教学过程设计 | 把课程内容转化为可授课的流程、活动、时间分配、讲师/学员动作和学习衡量 | 总体流程、模块过程表、活动设计表、开场导入、讲师引导 |
+| 汇报 | `course-briefing` | 说课 | 面向评审专家、业务负责人、培训管理者或讲师团队说明课程设计逻辑和亮点 | 说课结构、完整说课稿、设计亮点、答辩准备 |
 | 支持 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
 | 评估 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
 
@@ -36,13 +37,14 @@ workspace/course-development/{COURSE_ID}/
 ├── 03.course-structure.md
 ├── 04.content-organization.md
 ├── 05.process-design.md
-├── 06.expert-interview-outline.md
-├── 07.quiz-generation.md
+├── 06.course-briefing.md
+├── 07.expert-interview-outline.md
+├── 08.quiz-generation.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
 
-其中 `lineage-map.md` 用于维护目标、模块、内容、活动、访谈问题和试题之间的追溯关系。
+其中 `lineage-map.md` 用于维护目标、模块、内容、活动、说课要点、访谈问题和试题之间的追溯关系。
 
 Agent 会按下面逻辑统筹：
 
@@ -51,6 +53,7 @@ Agent 会按下面逻辑统筹：
 - 目标稳定但结构未定：调用 `$course-structure`
 - 已有结构和素材：调用 `$content-organization`
 - 内容稳定需要授课流程：调用 `$process-design`
+- 需要说课或课程评审汇报：调用 `$course-briefing`
 - 需要专家经验：调用 `$expert-interview-outline`
 - 需要学习评估：调用 `$quiz-generation`
 
@@ -72,6 +75,7 @@ $topic-analysis
   -> $course-structure
   -> $content-organization
   -> $process-design
+  -> $course-briefing
   -> $quiz-generation
 ```
 
@@ -207,7 +211,29 @@ $course-structure -> $expert-interview-outline -> $content-organization -> $proc
 Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 ```
 
-### 7. `$quiz-generation`
+### 7. `$course-briefing`
+
+用于生成说课稿、课程设计汇报、课程评审说明或讲师试讲前说明。
+
+正式说课建议输入：
+
+- 课题分析结论
+- 课程目标
+- 课程结构
+- 内容组织结果
+- 教学过程设计
+- 学习评估方案，如有
+- 说课对象、场景和时长
+
+默认说课主线：
+
+```text
+为什么开这门课 -> 学员要达成什么目标 -> 课程如何搭结构 -> 内容如何支撑目标 -> 教学过程如何促成学习 -> 如何评估效果 -> 课程价值与落地保障
+```
+
+它重点说明课程设计逻辑，不是复述课程目录。
+
+### 8. `$quiz-generation`
 
 用于生成课后考试题、随堂测试题、答案解析或题库内容。
 
@@ -290,6 +316,16 @@ $course-objectives -> $content-organization -> $quiz-generation
 
 确保题目能检验课程目标，而不是只考记忆和概念。
 
+### 生成课程说课稿
+
+使用：
+
+```text
+$topic-analysis -> $course-objectives -> $course-structure -> $content-organization -> $process-design -> $course-briefing
+```
+
+确保说课能讲清课程背景、目标、结构、内容取舍、教学过程、评估闭环和设计亮点。
+
 ## Quality Principles
 
 这套 skill 共同遵循以下质量原则：
@@ -314,6 +350,7 @@ $course-objectives -> $content-organization -> $quiz-generation
 ├── course-structure/
 ├── content-organization/
 ├── process-design/
+├── course-briefing/
 ├── expert-interview-outline/
 └── quiz-generation/
 ```

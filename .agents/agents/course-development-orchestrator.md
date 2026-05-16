@@ -1,6 +1,6 @@
 ---
 name: course-development-orchestrator
-description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按阶段忠实调用 topic-analysis、course-objectives、course-structure、content-organization、process-design、expert-interview-outline 和 quiz-generation 等 skills，并通过工作区产物、阶段门和追溯关系推进课程从课题分析到学习评估的完整开发。
+description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按阶段忠实调用 topic-analysis、course-objectives、course-structure、content-organization、process-design、course-briefing、expert-interview-outline 和 quiz-generation 等 skills，并通过工作区产物、阶段门和追溯关系推进课程从课题分析到学习评估和说课汇报的完整开发。
 ---
 
 # Course Development Orchestrator
@@ -54,6 +54,7 @@ workspace/course-development/{COURSE_ID}/
 | 3 | `$course-structure` | `.agents/skills/course-structure/SKILL.md` | 结构搭建 |
 | 4 | `$content-organization` | `.agents/skills/content-organization/SKILL.md` | 内容组织 |
 | 5 | `$process-design` | `.agents/skills/process-design/SKILL.md` | 教学过程设计 |
+| Briefing | `$course-briefing` | `.agents/skills/course-briefing/SKILL.md` | 说课 |
 | Support | `$expert-interview-outline` | `.agents/skills/expert-interview-outline/SKILL.md` | 专家访谈提纲 |
 | Assessment | `$quiz-generation` | `.agents/skills/quiz-generation/SKILL.md` | 试题生成 |
 
@@ -80,8 +81,9 @@ workspace/course-development/{COURSE_ID}/
 ├── 03.course-structure.md
 ├── 04.content-organization.md
 ├── 05.process-design.md
-├── 06.expert-interview-outline.md
-├── 07.quiz-generation.md
+├── 06.course-briefing.md
+├── 07.expert-interview-outline.md
+├── 08.quiz-generation.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
@@ -94,9 +96,10 @@ workspace/course-development/{COURSE_ID}/
 - `03.course-structure.md`：结构逻辑、模块表、承接关系和内容取舍。
 - `04.content-organization.md`：内容取舍、内容分类、模块内容组织、案例和练习建议。
 - `05.process-design.md`：教学流程、活动、时间、讲师/学员动作、开场导入、学习衡量。
-- `06.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏。
-- `07.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注。
-- `lineage-map.md`：目标、模块、内容、活动、访谈问题和试题之间的追溯关系。
+- `06.course-briefing.md`：说课定位、说课主线、说课稿、设计亮点和答辩准备。
+- `07.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏。
+- `08.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注。
+- `lineage-map.md`：目标、模块、内容、活动、说课要点、访谈问题和试题之间的追溯关系。
 - `wip-notes.md`：缺失输入、假设、风险、用户决策和待办。
 
 如果本轮只是回答一个短问题，可以不写文件；但对于完整课程开发、跨多轮工作或用户要求“统筹”时，应维护这些产物。
@@ -117,6 +120,7 @@ Actions:
    - 已有目标：进入 Stage 3。
    - 已有结构：进入 Stage 4。
    - 已有内容组织：进入 Stage 5。
+   - 需要说课、课程评审或汇报口径：进入 Briefing Stage。
    - 需要专家经验：插入 Support Stage。
    - 需要考试题：进入 Assessment Stage。
 4. 记录关键假设和缺口。
@@ -220,7 +224,7 @@ Input:
 
 Output:
 
-- `06.expert-interview-outline.md`
+- `07.expert-interview-outline.md`
 
 Stage gate:
 
@@ -238,7 +242,7 @@ Input:
 
 - `02.course-objectives.md`
 - `03.course-structure.md`
-- `06.expert-interview-outline.md` 或访谈结果，如有。
+- `07.expert-interview-outline.md` 或访谈结果，如有。
 - 用户提供的课件、制度、案例、模板、素材。
 
 Output:
@@ -290,7 +294,7 @@ Input:
 
 Output:
 
-- `07.quiz-generation.md`
+- `08.quiz-generation.md`
 
 Stage gate:
 
@@ -298,6 +302,39 @@ Stage gate:
 - 核心知识点、关键技能点和高频易错点占比不低于 70%。
 - 每题有答案、解析、目标/知识点标注和难度。
 - 题量、分值、总分核算准确。
+
+### Briefing Stage: Course Briefing
+
+Use `$course-briefing`.
+
+Goal: 生成说课方案、课程设计汇报口径或评审答辩准备。
+
+When to insert:
+
+- 课程目标、结构、内容和过程已基本稳定。
+- 用户需要“说课稿、课程设计汇报、课程评审说明、讲师试讲前说明、评审答辩”。
+- 需要把课程开发成果讲给业务负责人、培训管理者、评审专家或讲师团队。
+
+Input:
+
+- `01.topic-analysis.md`
+- `02.course-objectives.md`
+- `03.course-structure.md`
+- `04.content-organization.md`
+- `05.process-design.md`
+- `08.quiz-generation.md`，如有。
+- 说课对象、说课场景、说课时长和格式要求。
+
+Output:
+
+- `06.course-briefing.md`
+
+Stage gate:
+
+- 说课主线能说明“为什么开课、目标是什么、结构如何支撑、内容如何取舍、过程如何促学、评估如何验证”。
+- 说课稿符合指定对象和时长。
+- 设计亮点和答辩回答能追溯到课程开发产物。
+- 没有把课程目录当成说课主线。
 
 ## Faithful Skill Invocation Standard
 
@@ -333,6 +370,7 @@ Stage gate:
 | Objective | O1 | topic-analysis: 学员不会点 | 用户材料 / 假设 |  |
 | Module | M1 | O1, KAS-S2 | course-objectives |  |
 | Activity | A1 | M1, O1 | content-organization |  |
+| Briefing | B1 | O1, M1, A1 | course-briefing |  |
 | Quiz | Q3 | O1, M1 | quiz-generation |  |
 ```
 
@@ -341,6 +379,7 @@ Stage gate:
 - 每条课程目标要追溯到业务问题、学员场景或绩效差距。
 - 每个模块要追溯到目标或 KAS 内容。
 - 每个活动要追溯到模块和目标。
+- 每个说课要点要追溯到课题分析、目标、结构、内容、过程或评估产物。
 - 每个访谈问题要追溯到痛点、目标或模块。
 - 每道试题要追溯到目标、模块或核心知识点。
 - 推断内容必须标注为“假设”，不能写成事实。
@@ -389,6 +428,7 @@ Stage gate:
 - [ ] 没有把资料目录直接当课程结构。
 - [ ] 没有写无法观察和评估的目标。
 - [ ] 没有设计脱离目标的活动、访谈问题或试题。
+- [ ] 如果生成说课稿，已说明课程设计依据，而不是只复述课程目录。
 - [ ] 如果是多阶段任务，已更新或建议更新工作区产物。
 
 ## Important Notes

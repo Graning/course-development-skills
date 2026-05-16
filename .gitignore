@@ -20,6 +20,8 @@
 !.agents/skills/content-organization/**
 !.agents/skills/process-design/
 !.agents/skills/process-design/**
+!.agents/skills/course-briefing/
+!.agents/skills/course-briefing/**
 !.agents/skills/expert-interview-outline/
 !.agents/skills/expert-interview-outline/**
 !.agents/skills/quiz-generation/
