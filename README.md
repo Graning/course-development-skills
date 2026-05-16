@@ -1,6 +1,6 @@
 # Course Development Skills
 
-这是一套用于企业培训课程开发的 Codex skills，覆盖从课题判断、目标设定、课程结构、内容组织、教学过程，到专家访谈和课后考试题生成的完整链路。
+这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，覆盖从课题判断、目标设定、课程结构、内容组织、教学过程，到专家访谈和课后考试题生成的完整链路。
 
 它的核心原则是：课程开发必须从业务问题和学员工作场景出发，而不是从已有资料目录或讲师想讲的内容出发。每个 skill 都要求产出能追溯到课程目标、学员痛点、工作任务和可观察的学习证据。
 
@@ -15,6 +15,28 @@
 | 5 | `process-design` | 教学过程设计 | 把课程内容转化为可授课的流程、活动、时间分配、讲师/学员动作和学习衡量 | 总体流程、模块过程表、活动设计表、开场导入、讲师引导 |
 | 支持 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
 | 评估 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
+
+## Orchestrator Agent
+
+本仓库提供一个课程开发统筹 Agent：
+
+```text
+.agents/agents/course-development-orchestrator.md
+```
+
+它的角色是主动判断当前课程开发阶段，并选择合适的 skill 组合推进工作。适合在用户只给出模糊需求、零散材料、专家经验或课程草稿时使用。
+
+Agent 会按下面逻辑统筹：
+
+- 只有主题或培训需求：先调用 `$topic-analysis`
+- 课题边界清楚但目标模糊：调用 `$course-objectives`
+- 目标稳定但结构未定：调用 `$course-structure`
+- 已有结构和素材：调用 `$content-organization`
+- 内容稳定需要授课流程：调用 `$process-design`
+- 需要专家经验：调用 `$expert-interview-outline`
+- 需要学习评估：调用 `$quiz-generation`
+
+它不会机械调用全部 skill，而是根据当前任务选择最小但足够的组合。
 
 ## Recommended Workflow
 
@@ -276,6 +298,11 @@ $course-objectives -> $content-organization -> $quiz-generation
 ├── process-design/
 ├── expert-interview-outline/
 └── quiz-generation/
+```
+
+```text
+.agents/agents/
+└── course-development-orchestrator.md
 ```
 
 每个 skill 通常包含：

@@ -7,6 +7,8 @@
 
 # Track only the course-development skills.
 !.agents/
+!.agents/agents/
+!.agents/agents/**
 !.agents/skills/
 !.agents/skills/topic-analysis/
 !.agents/skills/topic-analysis/**
