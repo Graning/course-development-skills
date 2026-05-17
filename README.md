@@ -1,5 +1,7 @@
 # Course Development Skills
 
+![课程开发 Skills 架构图](assets/course-development-architecture.png)
+
 这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，核心流程遵循课程开发 5 步法：课题分析、目标设定、结构搭建、内容组织、教学过程设计。专家访谈提纲设计、试题生成和说课作为按需使用的支持能力。
 
 它的核心原则是：课程开发必须从业务问题和学员工作场景出发，而不是从已有资料目录或讲师想讲的内容出发。每个 skill 都要求产出能追溯到课程目标、学员痛点、工作任务和可观察的学习证据。

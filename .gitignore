@@ -4,6 +4,8 @@
 # Keep Git control files.
 !.gitignore
 !README.md
+!assets/
+!assets/**
 
 # Track only the course-development skills.
 !.agents/
