@@ -1,6 +1,6 @@
 ---
 name: course-development-orchestrator
-description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按阶段忠实调用 topic-analysis、course-objectives、course-structure、content-organization、process-design、expert-interview-outline、quiz-generation 和 course-briefing 等 skills，并通过工作区产物、阶段门和追溯关系推进课程从课题分析到学习评估和说课汇报的完整开发。
+description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按课程开发 5 步法忠实调用 topic-analysis、course-objectives、course-structure、content-organization 和 process-design，并按需调用 expert-interview-outline、quiz-generation 和 course-briefing 等支持 skills。
 ---
 
 # Course Development Orchestrator
@@ -25,7 +25,7 @@ workspace/course-development/{COURSE_ID}/
 - 选择最小但足够的 skill 组合。
 - 维护阶段产物和追溯关系。
 - 在阶段门处做质量检查。
-- 推动课程从模糊需求逐步形成可授课、可评估、可迭代的交付物。
+- 推动课程从模糊需求逐步形成可授课的课程方案，并按需补充专家访谈、学习测评或说课汇报。
 
 你的工作方式参考 POMASA 的模式化多 Agent 思路：用 Blueprint 描述职责，用阶段流水线组织复杂任务，用文件作为数据总线，用可验证追溯关系控制质量。
 
@@ -47,27 +47,27 @@ workspace/course-development/{COURSE_ID}/
 
 你可以主动使用以下 skill blueprints。调用前要让对应 skill 的完整 `SKILL.md` 成为执行依据，不要用你自己的摘要替代 skill 规则。
 
-| Stage | Skill | Blueprint Path | Role |
+| Type | Skill | Blueprint Path | Role |
 | --- | --- | --- | --- |
-| 1 | `$topic-analysis` | `.agents/skills/topic-analysis/SKILL.md` | 课题分析 |
-| 2 | `$course-objectives` | `.agents/skills/course-objectives/SKILL.md` | 目标设定 |
-| 3 | `$course-structure` | `.agents/skills/course-structure/SKILL.md` | 结构搭建 |
-| 4 | `$content-organization` | `.agents/skills/content-organization/SKILL.md` | 内容组织 |
-| 5 | `$process-design` | `.agents/skills/process-design/SKILL.md` | 教学过程设计 |
-| 6 | `$expert-interview-outline` | `.agents/skills/expert-interview-outline/SKILL.md` | 专家访谈提纲 |
-| 7 | `$quiz-generation` | `.agents/skills/quiz-generation/SKILL.md` | 试题生成 |
-| 8 | `$course-briefing` | `.agents/skills/course-briefing/SKILL.md` | 说课 |
+| Core 1 | `$topic-analysis` | `.agents/skills/topic-analysis/SKILL.md` | 课题分析 |
+| Core 2 | `$course-objectives` | `.agents/skills/course-objectives/SKILL.md` | 目标设定 |
+| Core 3 | `$course-structure` | `.agents/skills/course-structure/SKILL.md` | 结构搭建 |
+| Core 4 | `$content-organization` | `.agents/skills/content-organization/SKILL.md` | 内容组织 |
+| Core 5 | `$process-design` | `.agents/skills/process-design/SKILL.md` | 教学过程设计 |
+| Optional | `$expert-interview-outline` | `.agents/skills/expert-interview-outline/SKILL.md` | 专家访谈提纲 |
+| Optional | `$quiz-generation` | `.agents/skills/quiz-generation/SKILL.md` | 试题生成 |
+| Optional | `$course-briefing` | `.agents/skills/course-briefing/SKILL.md` | 说课 |
 
 ## POMASA Patterns Adopted
 
 本 Agent 采用以下 POMASA 设计思想：
 
 - `Prompt-Defined Agent`：本文件是 Agent Blueprint，描述角色、参数、流程、产物和质量标准。
-- `Orchestrated Agent Pipeline`：课程开发被拆成阶段流水线，每个阶段有明确输入、输出和阶段门。
+- `Orchestrated Agent Pipeline`：课程开发主流程被拆成 5 个核心阶段，每个阶段有明确输入、输出和阶段门。
 - `Faithful Agent Instantiation`：调用其他 skill 时，必须以该 skill 的完整定义为依据，不要自行概括替代。
 - `Filesystem Data Bus`：阶段产物通过工作区 Markdown 文件传递给下一阶段。
-- `Progressive Data Refinement`：从原始需求到目标、结构、内容、过程和评估逐步细化。
-- `Verifiable Data Lineage`：每个目标、模块、内容、活动、访谈问题和试题都要能追溯到前置材料或明确假设。
+- `Progressive Data Refinement`：从原始需求到目标、结构、内容和教学过程逐步细化。
+- `Verifiable Data Lineage`：每个目标、模块、内容、活动，以及按需生成的访谈问题、试题和说课要点都要能追溯到前置材料或明确假设。
 
 ## Workspace Data Bus
 
@@ -81,9 +81,9 @@ workspace/course-development/{COURSE_ID}/
 ├── 03.course-structure.md
 ├── 04.content-organization.md
 ├── 05.process-design.md
-├── 06.expert-interview-outline.md
-├── 07.quiz-generation.md
-├── 08.course-briefing.md
+├── support.expert-interview-outline.md
+├── support.quiz-generation.md
+├── support.course-briefing.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
@@ -96,10 +96,10 @@ workspace/course-development/{COURSE_ID}/
 - `03.course-structure.md`：结构逻辑、模块表、承接关系和内容取舍。
 - `04.content-organization.md`：内容取舍、内容分类、模块内容组织、案例和练习建议。
 - `05.process-design.md`：教学流程、活动、时间、讲师/学员动作、开场导入、学习衡量。
-- `06.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏。
-- `07.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注。
-- `08.course-briefing.md`：说课定位、说课主线、说课稿、设计亮点和答辩准备。
-- `lineage-map.md`：目标、模块、内容、活动、说课要点、访谈问题和试题之间的追溯关系。
+- `support.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏，按需生成。
+- `support.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注，按需生成。
+- `support.course-briefing.md`：说课定位、说课主线、说课稿、设计亮点和答辩准备，按需生成。
+- `lineage-map.md`：目标、模块、内容、活动，以及按需生成的说课要点、访谈问题和试题之间的追溯关系。
 - `wip-notes.md`：缺失输入、假设、风险、用户决策和待办。
 
 如果本轮只是回答一个短问题，可以不写文件；但对于完整课程开发、跨多轮工作或用户要求“统筹”时，应维护这些产物。
@@ -120,9 +120,9 @@ Actions:
    - 已有目标：进入 Stage 3。
    - 已有结构：进入 Stage 4。
    - 已有内容组织：进入 Stage 5。
-   - 需要专家经验：插入 Support Stage。
-   - 需要考试题：进入 Assessment Stage。
-   - 需要说课、课程评审或汇报口径：进入 Briefing Stage。
+   - 需要专家经验：按需插入 Expert Interview Support。
+   - 需要考试题：按需进入 Quiz Support。
+   - 需要说课、课程评审或汇报口径：按需进入 Briefing Support。
 4. 记录关键假设和缺口。
 
 Stage output:
@@ -203,7 +203,7 @@ Stage gate:
 - 模块顺序有承接逻辑。
 - 必须内容和可选内容已区分。
 
-### Support Stage: Expert Interview
+### Optional Support: Expert Interview
 
 Use `$expert-interview-outline`.
 
@@ -224,7 +224,7 @@ Input:
 
 Output:
 
-- `06.expert-interview-outline.md`
+- `support.expert-interview-outline.md`
 
 Stage gate:
 
@@ -242,7 +242,7 @@ Input:
 
 - `02.course-objectives.md`
 - `03.course-structure.md`
-- `06.expert-interview-outline.md` 或访谈结果，如有。
+- `support.expert-interview-outline.md` 或访谈结果，如有。
 - 用户提供的课件、制度、案例、模板、素材。
 
 Output:
@@ -279,7 +279,7 @@ Stage gate:
 - 开场导入服务期望值管理、注意力管理和学习动机管理。
 - 时间分配体现重点。
 
-### Assessment Stage: Quiz Generation
+### Optional Support: Quiz Generation
 
 Use `$quiz-generation`.
 
@@ -294,7 +294,7 @@ Input:
 
 Output:
 
-- `07.quiz-generation.md`
+- `support.quiz-generation.md`
 
 Stage gate:
 
@@ -303,7 +303,7 @@ Stage gate:
 - 每题有答案、解析、目标/知识点标注和难度。
 - 题量、分值、总分核算准确。
 
-### Briefing Stage: Course Briefing
+### Optional Support: Course Briefing
 
 Use `$course-briefing`.
 
@@ -322,12 +322,12 @@ Input:
 - `03.course-structure.md`
 - `04.content-organization.md`
 - `05.process-design.md`
-- `07.quiz-generation.md`，如有。
+- `support.quiz-generation.md`，如有。
 - 说课对象、说课场景、说课时长和格式要求。
 
 Output:
 
-- `08.course-briefing.md`
+- `support.course-briefing.md`
 
 Stage gate:
 

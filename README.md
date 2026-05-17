@@ -1,21 +1,21 @@
 # Course Development Skills
 
-这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，覆盖从课题判断、目标设定、课程结构、内容组织、教学过程，到专家访谈、学习评估和说课汇报的完整链路。
+这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，核心流程遵循课程开发 5 步法：课题分析、目标设定、结构搭建、内容组织、教学过程设计。专家访谈提纲设计、试题生成和说课作为按需使用的支持能力。
 
 它的核心原则是：课程开发必须从业务问题和学员工作场景出发，而不是从已有资料目录或讲师想讲的内容出发。每个 skill 都要求产出能追溯到课程目标、学员痛点、工作任务和可观察的学习证据。
 
 ## Skills Overview
 
-| 顺序 | Skill | 中文名称 | 主要用途 | 典型产出 |
+| 类型 | Skill | 中文名称 | 主要用途 | 典型产出 |
 | --- | --- | --- | --- | --- |
-| 1 | `topic-analysis` | 课题分析 | 判断课题是否适合做成课程，明确业务目标、学员对象、工作场景、绩效差距、KAS 内容地图和课程边界 | 课题分析简报、KAS 内容地图、范围边界、课程启示 |
-| 2 | `course-objectives` | 目标设定 | 把模糊培训意图转化为可观察、可衡量、可评估的课程目标 | 课程目标组、目标类别/水平、KAS 映射、评估证据 |
-| 3 | `course-structure` | 结构搭建 | 把目标、任务和素材整理为清晰的课程模块、层级和逻辑顺序 | 一级/二级模块表、承接逻辑、内容取舍 |
-| 4 | `content-organization` | 内容组织 | 根据目标和结构筛选、归类、裁剪和排序课程内容 | 内容取舍表、内容分类表、模块内容组织表、案例/练习建议 |
-| 5 | `process-design` | 教学过程设计 | 把课程内容转化为可授课的流程、活动、时间分配、讲师/学员动作和学习衡量 | 总体流程、模块过程表、活动设计表、开场导入、讲师引导 |
-| 6 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
-| 7 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
-| 8 | `course-briefing` | 说课 | 面向评审专家、业务负责人、培训管理者或讲师团队说明课程设计逻辑和亮点 | 说课结构、完整说课稿、设计亮点、答辩准备 |
+| 核心 1 | `topic-analysis` | 课题分析 | 判断课题是否适合做成课程，明确业务目标、学员对象、工作场景、绩效差距、KAS 内容地图和课程边界 | 课题分析简报、KAS 内容地图、范围边界、课程启示 |
+| 核心 2 | `course-objectives` | 目标设定 | 把模糊培训意图转化为可观察、可衡量、可评估的课程目标 | 课程目标组、目标类别/水平、KAS 映射、评估证据 |
+| 核心 3 | `course-structure` | 结构搭建 | 把目标、任务和素材整理为清晰的课程模块、层级和逻辑顺序 | 一级/二级模块表、承接逻辑、内容取舍 |
+| 核心 4 | `content-organization` | 内容组织 | 根据目标和结构筛选、归类、裁剪和排序课程内容 | 内容取舍表、内容分类表、模块内容组织表、案例/练习建议 |
+| 核心 5 | `process-design` | 教学过程设计 | 把课程内容转化为可授课的流程、活动、时间分配、讲师/学员动作和学习衡量 | 总体流程、模块过程表、活动设计表、开场导入、讲师引导 |
+| 按需 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
+| 按需 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
+| 按需 | `course-briefing` | 说课 | 面向评审专家、业务负责人、培训管理者或讲师团队说明课程设计逻辑和亮点 | 说课结构、完整说课稿、设计亮点、答辩准备 |
 
 ## Orchestrator Agent
 
@@ -37,14 +37,14 @@ workspace/course-development/{COURSE_ID}/
 ├── 03.course-structure.md
 ├── 04.content-organization.md
 ├── 05.process-design.md
-├── 06.expert-interview-outline.md
-├── 07.quiz-generation.md
-├── 08.course-briefing.md
+├── support.expert-interview-outline.md
+├── support.quiz-generation.md
+├── support.course-briefing.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
 
-其中 `lineage-map.md` 用于维护目标、模块、内容、活动、说课要点、访谈问题和试题之间的追溯关系。
+其中 `lineage-map.md` 用于维护目标、模块、内容、活动，以及按需生成的访谈问题、试题和说课要点之间的追溯关系。
 
 Agent 会按下面逻辑统筹：
 
@@ -61,10 +61,10 @@ Agent 会按下面逻辑统筹：
 
 ## Recommended Workflow
 
-建议按下面顺序开发一门课程：
+课程开发主流程固定为 5 步：
 
 ```text
-课题分析 -> 目标设定 -> 结构搭建 -> 内容组织 -> 教学过程设计 -> 学习评估 -> 说课汇报
+课题分析 -> 目标设定 -> 结构搭建 -> 内容组织 -> 教学过程设计
 ```
 
 对应 skill：
@@ -75,14 +75,14 @@ $topic-analysis
   -> $course-structure
   -> $content-organization
   -> $process-design
-  -> $quiz-generation
-  -> $course-briefing
 ```
 
-如果课程内容依赖专家经验，在结构稳定后插入专家访谈：
+按需支持能力根据任务插入或追加：
 
 ```text
-$course-structure -> $expert-interview-outline -> $content-organization -> $process-design
+专家访谈提纲设计：通常在结构搭建后、内容组织前使用
+试题生成：通常在目标、内容和教学过程稳定后使用
+说课：通常在核心五步完成后，用于课程评审、汇报或讲师试讲前说明
 ```
 
 ## What Each Skill Needs
@@ -183,7 +183,7 @@ $course-structure -> $expert-interview-outline -> $content-organization -> $proc
 问好 + 介绍 -> 导入主题 -> 分组/破冰 -> 公约 + 目标 -> 课程结构
 ```
 
-### 6. `$expert-interview-outline`
+### 按需：`$expert-interview-outline`
 
 用于访谈业务专家、岗位高手、流程负责人或一线骨干，萃取课程开发素材。
 
@@ -211,7 +211,7 @@ $course-structure -> $expert-interview-outline -> $content-organization -> $proc
 Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 ```
 
-### 7. `$quiz-generation`
+### 按需：`$quiz-generation`
 
 用于生成课后考试题、随堂测试题、答案解析或题库内容。
 
@@ -232,7 +232,7 @@ Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 - 态度类目标用场景判断题检验认知和价值取向
 - 每题必须有答案、解析、对应目标/知识点和难度标注
 
-### 8. `$course-briefing`
+### 按需：`$course-briefing`
 
 用于生成说课稿、课程设计汇报、课程评审说明或讲师试讲前说明。
 
@@ -321,7 +321,7 @@ $course-objectives -> $content-organization -> $quiz-generation
 使用：
 
 ```text
-$topic-analysis -> $course-objectives -> $course-structure -> $content-organization -> $process-design -> $quiz-generation -> $course-briefing
+$topic-analysis -> $course-objectives -> $course-structure -> $content-organization -> $process-design -> $course-briefing
 ```
 
 确保说课能讲清课程背景、目标、结构、内容取舍、教学过程、评估闭环和设计亮点。
