@@ -66,7 +66,7 @@ workspace/course-development/{COURSE_ID}/
 - `Prompt-Defined Agent`：本文件是 Agent Blueprint，描述角色、参数、流程、产物和质量标准。
 - `Orchestrated Agent Pipeline`：课程开发主流程被拆成 5 个核心阶段，每个阶段有明确输入、输出和阶段门。
 - `Faithful Agent Instantiation`：调用其他 skill 时，必须以该 skill 的完整定义为依据，不要自行概括替代。
-- `Filesystem Data Bus`：阶段产物通过工作区 Markdown 文件传递给下一阶段。
+- `Filesystem Data Bus`：阶段产物通过工作区 Markdown 文件传递给下一阶段；按需画布类产物可使用 Excel。
 - `Progressive Data Refinement`：从原始需求到目标、结构、内容和教学过程逐步细化。
 - `Verifiable Data Lineage`：每个目标、模块、内容、活动，以及按需生成的访谈问题、试题、说课要点和画布字段都要能追溯到前置材料或明确假设。
 
@@ -85,7 +85,7 @@ workspace/course-development/{COURSE_ID}/
 ├── support.expert-interview-outline.md
 ├── support.quiz-generation.md
 ├── support.course-briefing.md
-├── support.topic-analysis-canvas.md
+├── support.topic-analysis-canvas.xlsx
 ├── lineage-map.md
 └── wip-notes.md
 ```
@@ -101,7 +101,7 @@ workspace/course-development/{COURSE_ID}/
 - `support.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏，按需生成。
 - `support.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注，按需生成。
 - `support.course-briefing.md`：说课定位、说课主线、说课稿、设计亮点和答辩准备，按需生成。
-- `support.topic-analysis-canvas.md`：课题分析画布字段、关键行为、透视问题、隐藏内容和涉及方法，按需生成。
+- `support.topic-analysis-canvas.xlsx`：课题分析画布 Excel，参考模板填写课程对象、背景、关键行为、透视问题、隐藏内容和涉及方法，按需生成。
 - `lineage-map.md`：目标、模块、内容、活动，以及按需生成的说课要点、访谈问题、试题和画布字段之间的追溯关系。
 - `wip-notes.md`：缺失输入、假设、风险、用户决策和待办。
 
@@ -167,7 +167,7 @@ Stage gate:
 
 Use `$topic-analysis-canvas`.
 
-Goal: 按课题分析画布模板生成、填写或校准 Who / Why / What / How 画布。
+Goal: 参考课题分析画布模板生成、填写或校准 Who / Why / What / How Excel 画布。
 
 When to insert:
 
@@ -182,11 +182,12 @@ Input:
 
 Output:
 
-- `support.topic-analysis-canvas.md`
-- 如用户要求 Excel，则生成基于模板的 `.xlsx` 文件。
+- `support.topic-analysis-canvas.xlsx`
+- 如需要解释填写依据，可额外生成简短 Markdown 说明。
 
 Stage gate:
 
+- 输出物是基于模板生成的 Excel 文件。
 - 画布包含课程对象、课程名称、行业/公司/现状背景。
 - 每个关键行为都有对应的透视问题、隐藏内容和涉及方法。
 - 问题是学员当前存在的问题，不是管理目标。

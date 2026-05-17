@@ -18,7 +18,7 @@
 | 按需 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
 | 按需 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
 | 按需 | `course-briefing` | 说课 | 面向评审专家、业务负责人、培训管理者或讲师团队说明课程设计逻辑和亮点 | 说课结构、完整说课稿、设计亮点、答辩准备 |
-| 按需 | `topic-analysis-canvas` | 课题分析画布 | 按 Who/Why/What/How 画布填写或校准课题分析表 | 课题分析画布、Excel 模板填表、字段诊断 |
+| 按需 | `topic-analysis-canvas` | 课题分析画布 | 参考模板生成、填写或校准课题分析画布 Excel | 课题分析画布 Excel、字段诊断、假设与待确认项 |
 
 ## Orchestrator Agent
 
@@ -43,7 +43,7 @@ workspace/course-development/{COURSE_ID}/
 ├── support.expert-interview-outline.md
 ├── support.quiz-generation.md
 ├── support.course-briefing.md
-├── support.topic-analysis-canvas.md
+├── support.topic-analysis-canvas.xlsx
 ├── lineage-map.md
 └── wip-notes.md
 ```
@@ -88,7 +88,7 @@ $topic-analysis
 专家访谈提纲设计：通常在结构搭建后、内容组织前使用
 试题生成：通常在目标、内容和教学过程稳定后使用
 说课：通常在核心五步完成后，用于课程评审、汇报或讲师试讲前说明
-课题分析画布：需要按画布模板填表、生成 Excel 或校准画布时使用
+课题分析画布：需要参考模板生成 Excel、按画布填表或校准画布时使用
 ```
 
 ## What Each Skill Needs
@@ -262,7 +262,7 @@ Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 
 ### 按需：`$topic-analysis-canvas`
 
-用于按“课题分析画布”模板填写、生成或校准课题分析表。
+用于参考内置模板生成、填写或校准“课题分析画布”Excel 文件。
 
 画布字段：
 
@@ -274,7 +274,7 @@ Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 - 隐藏的内容⑥ How
 - 涉及的方法⑦ How
 
-适合在需要 Excel 画布、表格填报或把课题分析结果转成画布格式时使用。
+正式输出物为 `.xlsx` 文件，必须参考模板；Markdown 只用于预览或说明待确认项。
 
 ## Common Use Cases
 

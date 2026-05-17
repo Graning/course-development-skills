@@ -1,4 +1,4 @@
 interface:
   display_name: "课题分析画布"
-  short_description: "按 Who/Why/What/How 画布拆解培训课题"
-  default_prompt: "使用 $topic-analysis-canvas，按课题分析画布填写课程对象、课程名称、行业/公司/现状背景、关键行为、透视问题、隐藏内容和涉及方法。"
+  short_description: "参考模板生成课题分析画布 Excel"
+  default_prompt: "使用 $topic-analysis-canvas，参考内置 Excel 模板生成课题分析画布，填写课程对象、课程名称、行业/公司/现状背景、关键行为、透视问题、隐藏内容和涉及方法，并输出 .xlsx 文件。"
