@@ -1,6 +1,6 @@
 ---
 name: course-development-orchestrator
-description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按课程开发 5 步法忠实调用 topic-analysis、course-objectives、course-structure、content-organization 和 process-design，并按需调用 expert-interview-outline、quiz-generation 和 course-briefing 等支持 skills。
+description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按课程开发 5 步法忠实调用 topic-analysis、course-objectives、course-structure、content-organization 和 process-design，并按需调用 expert-interview-outline、quiz-generation、course-briefing 和 topic-analysis-canvas 等支持 skills。
 ---
 
 # Course Development Orchestrator
@@ -25,7 +25,7 @@ workspace/course-development/{COURSE_ID}/
 - 选择最小但足够的 skill 组合。
 - 维护阶段产物和追溯关系。
 - 在阶段门处做质量检查。
-- 推动课程从模糊需求逐步形成可授课的课程方案，并按需补充专家访谈、学习测评或说课汇报。
+- 推动课程从模糊需求逐步形成可授课的课程方案，并按需补充专家访谈、学习测评、说课汇报或课题分析画布。
 
 你的工作方式参考 POMASA 的模式化多 Agent 思路：用 Blueprint 描述职责，用阶段流水线组织复杂任务，用文件作为数据总线，用可验证追溯关系控制质量。
 
@@ -57,6 +57,7 @@ workspace/course-development/{COURSE_ID}/
 | Optional | `$expert-interview-outline` | `.agents/skills/expert-interview-outline/SKILL.md` | 专家访谈提纲 |
 | Optional | `$quiz-generation` | `.agents/skills/quiz-generation/SKILL.md` | 试题生成 |
 | Optional | `$course-briefing` | `.agents/skills/course-briefing/SKILL.md` | 说课 |
+| Optional | `$topic-analysis-canvas` | `.agents/skills/topic-analysis-canvas/SKILL.md` | 课题分析画布 |
 
 ## POMASA Patterns Adopted
 
@@ -67,7 +68,7 @@ workspace/course-development/{COURSE_ID}/
 - `Faithful Agent Instantiation`：调用其他 skill 时，必须以该 skill 的完整定义为依据，不要自行概括替代。
 - `Filesystem Data Bus`：阶段产物通过工作区 Markdown 文件传递给下一阶段。
 - `Progressive Data Refinement`：从原始需求到目标、结构、内容和教学过程逐步细化。
-- `Verifiable Data Lineage`：每个目标、模块、内容、活动，以及按需生成的访谈问题、试题和说课要点都要能追溯到前置材料或明确假设。
+- `Verifiable Data Lineage`：每个目标、模块、内容、活动，以及按需生成的访谈问题、试题、说课要点和画布字段都要能追溯到前置材料或明确假设。
 
 ## Workspace Data Bus
 
@@ -84,6 +85,7 @@ workspace/course-development/{COURSE_ID}/
 ├── support.expert-interview-outline.md
 ├── support.quiz-generation.md
 ├── support.course-briefing.md
+├── support.topic-analysis-canvas.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
@@ -99,7 +101,8 @@ workspace/course-development/{COURSE_ID}/
 - `support.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏，按需生成。
 - `support.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注，按需生成。
 - `support.course-briefing.md`：说课定位、说课主线、说课稿、设计亮点和答辩准备，按需生成。
-- `lineage-map.md`：目标、模块、内容、活动，以及按需生成的说课要点、访谈问题和试题之间的追溯关系。
+- `support.topic-analysis-canvas.md`：课题分析画布字段、关键行为、透视问题、隐藏内容和涉及方法，按需生成。
+- `lineage-map.md`：目标、模块、内容、活动，以及按需生成的说课要点、访谈问题、试题和画布字段之间的追溯关系。
 - `wip-notes.md`：缺失输入、假设、风险、用户决策和待办。
 
 如果本轮只是回答一个短问题，可以不写文件；但对于完整课程开发、跨多轮工作或用户要求“统筹”时，应维护这些产物。
@@ -123,6 +126,7 @@ Actions:
    - 需要专家经验：按需插入 Expert Interview Support。
    - 需要考试题：按需进入 Quiz Support。
    - 需要说课、课程评审或汇报口径：按需进入 Briefing Support。
+   - 需要课题分析画布、画布表格或 Excel 模板：按需进入 Topic Analysis Canvas Support。
 4. 记录关键假设和缺口。
 
 Stage output:
@@ -158,6 +162,35 @@ Stage gate:
 - 有目标学员与工作场景。
 - 有差距诊断和 KAS 内容地图。
 - 有必须覆盖、可选、排除内容。
+
+### Optional Support: Topic Analysis Canvas
+
+Use `$topic-analysis-canvas`.
+
+Goal: 按课题分析画布模板生成、填写或校准 Who / Why / What / How 画布。
+
+When to insert:
+
+- 用户需要“课题分析画布”“画布表”“按模板填表”或 Excel 画布。
+- 已有课程主题，但需要把课题分析压缩成课程对象、背景、关键行为、问题、内容和方法。
+- 已有 `$topic-analysis` 结果，需要转换成画布格式。
+
+Input:
+
+- `00.project-brief.md` 或 `01.topic-analysis.md`
+- 用户提供的课程主题、对象、背景、问题、工作任务或现有画布。
+
+Output:
+
+- `support.topic-analysis-canvas.md`
+- 如用户要求 Excel，则生成基于模板的 `.xlsx` 文件。
+
+Stage gate:
+
+- 画布包含课程对象、课程名称、行业/公司/现状背景。
+- 每个关键行为都有对应的透视问题、隐藏内容和涉及方法。
+- 问题是学员当前存在的问题，不是管理目标。
+- 隐藏内容与透视问题对应，没有把非培训管理动作写成课程内容。
 
 ### Stage 2: Course Objectives
 
@@ -372,6 +405,7 @@ Stage gate:
 | Activity | A1 | M1, O1 | content-organization |  |
 | Quiz | Q3 | O1, M1 | quiz-generation |  |
 | Briefing | B1 | O1, M1, A1, Q3 | course-briefing |  |
+| Canvas | C1 | topic-analysis, 用户材料 | topic-analysis-canvas |  |
 ```
 
 追溯要求：
@@ -382,6 +416,7 @@ Stage gate:
 - 每个说课要点要追溯到课题分析、目标、结构、内容、过程或评估产物。
 - 每个访谈问题要追溯到痛点、目标或模块。
 - 每道试题要追溯到目标、模块或核心知识点。
+- 每个画布字段要追溯到用户材料、课题分析或明确假设。
 - 推断内容必须标注为“假设”，不能写成事实。
 
 ## Exception Handling

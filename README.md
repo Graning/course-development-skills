@@ -2,7 +2,7 @@
 
 ![课程开发 Skills 架构图](assets/course-development-architecture.png)
 
-这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，核心流程遵循课程开发 5 步法：课题分析、目标设定、结构搭建、内容组织、教学过程设计。专家访谈提纲设计、试题生成和说课作为按需使用的支持能力。
+这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，核心流程遵循课程开发 5 步法：课题分析、目标设定、结构搭建、内容组织、教学过程设计。专家访谈提纲设计、试题生成、说课和课题分析画布作为按需使用的支持能力。
 
 它的核心原则是：课程开发必须从业务问题和学员工作场景出发，而不是从已有资料目录或讲师想讲的内容出发。每个 skill 都要求产出能追溯到课程目标、学员痛点、工作任务和可观察的学习证据。
 
@@ -18,6 +18,7 @@
 | 按需 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
 | 按需 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
 | 按需 | `course-briefing` | 说课 | 面向评审专家、业务负责人、培训管理者或讲师团队说明课程设计逻辑和亮点 | 说课结构、完整说课稿、设计亮点、答辩准备 |
+| 按需 | `topic-analysis-canvas` | 课题分析画布 | 按 Who/Why/What/How 画布填写或校准课题分析表 | 课题分析画布、Excel 模板填表、字段诊断 |
 
 ## Orchestrator Agent
 
@@ -42,11 +43,12 @@ workspace/course-development/{COURSE_ID}/
 ├── support.expert-interview-outline.md
 ├── support.quiz-generation.md
 ├── support.course-briefing.md
+├── support.topic-analysis-canvas.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
 
-其中 `lineage-map.md` 用于维护目标、模块、内容、活动，以及按需生成的访谈问题、试题和说课要点之间的追溯关系。
+其中 `lineage-map.md` 用于维护目标、模块、内容、活动，以及按需生成的访谈问题、试题、说课要点和画布字段之间的追溯关系。
 
 Agent 会按下面逻辑统筹：
 
@@ -58,6 +60,7 @@ Agent 会按下面逻辑统筹：
 - 需要专家经验：调用 `$expert-interview-outline`
 - 需要学习评估：调用 `$quiz-generation`
 - 需要说课或课程评审汇报：调用 `$course-briefing`
+- 需要按画布填表或输出 Excel 画布：调用 `$topic-analysis-canvas`
 
 它不会机械调用全部 skill，而是根据当前任务选择最小但足够的组合；调用 skill 时也不会用自己的摘要替代 skill，而是以对应 `SKILL.md` 的完整规则为准。
 
@@ -85,6 +88,7 @@ $topic-analysis
 专家访谈提纲设计：通常在结构搭建后、内容组织前使用
 试题生成：通常在目标、内容和教学过程稳定后使用
 说课：通常在核心五步完成后，用于课程评审、汇报或讲师试讲前说明
+课题分析画布：需要按画布模板填表、生成 Excel 或校准画布时使用
 ```
 
 ## What Each Skill Needs
@@ -256,6 +260,22 @@ Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 
 它重点说明课程设计逻辑，不是复述课程目录。
 
+### 按需：`$topic-analysis-canvas`
+
+用于按“课题分析画布”模板填写、生成或校准课题分析表。
+
+画布字段：
+
+- 课程对象① Who
+- 课程名称②
+- 课程产生的背景③ Why：行业、公司、现状三个角度
+- 关键行为（动作）④ What
+- 透视问题⑤ What
+- 隐藏的内容⑥ How
+- 涉及的方法⑦ How
+
+适合在需要 Excel 画布、表格填报或把课题分析结果转成画布格式时使用。
+
 ## Common Use Cases
 
 ### 判断一个课题能不能做成课
@@ -354,7 +374,8 @@ $topic-analysis -> $course-objectives -> $course-structure -> $content-organizat
 ├── process-design/
 ├── course-briefing/
 ├── expert-interview-outline/
-└── quiz-generation/
+├── quiz-generation/
+└── topic-analysis-canvas/
 ```
 
 ```text
