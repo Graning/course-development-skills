@@ -1,6 +1,6 @@
 ---
 name: course-development-orchestrator
-description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按阶段忠实调用 topic-analysis、course-objectives、course-structure、content-organization、process-design、course-briefing、expert-interview-outline 和 quiz-generation 等 skills，并通过工作区产物、阶段门和追溯关系推进课程从课题分析到学习评估和说课汇报的完整开发。
+description: 以 POMASA 风格主动统筹企业培训课程开发全流程。用于从模糊培训需求、课程主题、素材、专家经验或既有课程草稿出发，判断当前课程开发阶段，按阶段忠实调用 topic-analysis、course-objectives、course-structure、content-organization、process-design、expert-interview-outline、quiz-generation 和 course-briefing 等 skills，并通过工作区产物、阶段门和追溯关系推进课程从课题分析到学习评估和说课汇报的完整开发。
 ---
 
 # Course Development Orchestrator
@@ -54,9 +54,9 @@ workspace/course-development/{COURSE_ID}/
 | 3 | `$course-structure` | `.agents/skills/course-structure/SKILL.md` | 结构搭建 |
 | 4 | `$content-organization` | `.agents/skills/content-organization/SKILL.md` | 内容组织 |
 | 5 | `$process-design` | `.agents/skills/process-design/SKILL.md` | 教学过程设计 |
-| Briefing | `$course-briefing` | `.agents/skills/course-briefing/SKILL.md` | 说课 |
-| Support | `$expert-interview-outline` | `.agents/skills/expert-interview-outline/SKILL.md` | 专家访谈提纲 |
-| Assessment | `$quiz-generation` | `.agents/skills/quiz-generation/SKILL.md` | 试题生成 |
+| 6 | `$expert-interview-outline` | `.agents/skills/expert-interview-outline/SKILL.md` | 专家访谈提纲 |
+| 7 | `$quiz-generation` | `.agents/skills/quiz-generation/SKILL.md` | 试题生成 |
+| 8 | `$course-briefing` | `.agents/skills/course-briefing/SKILL.md` | 说课 |
 
 ## POMASA Patterns Adopted
 
@@ -81,9 +81,9 @@ workspace/course-development/{COURSE_ID}/
 ├── 03.course-structure.md
 ├── 04.content-organization.md
 ├── 05.process-design.md
-├── 06.course-briefing.md
-├── 07.expert-interview-outline.md
-├── 08.quiz-generation.md
+├── 06.expert-interview-outline.md
+├── 07.quiz-generation.md
+├── 08.course-briefing.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
@@ -96,9 +96,9 @@ workspace/course-development/{COURSE_ID}/
 - `03.course-structure.md`：结构逻辑、模块表、承接关系和内容取舍。
 - `04.content-organization.md`：内容取舍、内容分类、模块内容组织、案例和练习建议。
 - `05.process-design.md`：教学流程、活动、时间、讲师/学员动作、开场导入、学习衡量。
-- `06.course-briefing.md`：说课定位、说课主线、说课稿、设计亮点和答辩准备。
-- `07.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏。
-- `08.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注。
+- `06.expert-interview-outline.md`：访谈映射、7 步提纲、STAR 追问、记录栏。
+- `07.quiz-generation.md`：命题蓝图、试题、答案解析、目标/知识点标注。
+- `08.course-briefing.md`：说课定位、说课主线、说课稿、设计亮点和答辩准备。
 - `lineage-map.md`：目标、模块、内容、活动、说课要点、访谈问题和试题之间的追溯关系。
 - `wip-notes.md`：缺失输入、假设、风险、用户决策和待办。
 
@@ -120,9 +120,9 @@ Actions:
    - 已有目标：进入 Stage 3。
    - 已有结构：进入 Stage 4。
    - 已有内容组织：进入 Stage 5。
-   - 需要说课、课程评审或汇报口径：进入 Briefing Stage。
    - 需要专家经验：插入 Support Stage。
    - 需要考试题：进入 Assessment Stage。
+   - 需要说课、课程评审或汇报口径：进入 Briefing Stage。
 4. 记录关键假设和缺口。
 
 Stage output:
@@ -224,7 +224,7 @@ Input:
 
 Output:
 
-- `07.expert-interview-outline.md`
+- `06.expert-interview-outline.md`
 
 Stage gate:
 
@@ -242,7 +242,7 @@ Input:
 
 - `02.course-objectives.md`
 - `03.course-structure.md`
-- `07.expert-interview-outline.md` 或访谈结果，如有。
+- `06.expert-interview-outline.md` 或访谈结果，如有。
 - 用户提供的课件、制度、案例、模板、素材。
 
 Output:
@@ -294,7 +294,7 @@ Input:
 
 Output:
 
-- `08.quiz-generation.md`
+- `07.quiz-generation.md`
 
 Stage gate:
 
@@ -322,12 +322,12 @@ Input:
 - `03.course-structure.md`
 - `04.content-organization.md`
 - `05.process-design.md`
-- `08.quiz-generation.md`，如有。
+- `07.quiz-generation.md`，如有。
 - 说课对象、说课场景、说课时长和格式要求。
 
 Output:
 
-- `06.course-briefing.md`
+- `08.course-briefing.md`
 
 Stage gate:
 
@@ -370,8 +370,8 @@ Stage gate:
 | Objective | O1 | topic-analysis: 学员不会点 | 用户材料 / 假设 |  |
 | Module | M1 | O1, KAS-S2 | course-objectives |  |
 | Activity | A1 | M1, O1 | content-organization |  |
-| Briefing | B1 | O1, M1, A1 | course-briefing |  |
 | Quiz | Q3 | O1, M1 | quiz-generation |  |
+| Briefing | B1 | O1, M1, A1, Q3 | course-briefing |  |
 ```
 
 追溯要求：

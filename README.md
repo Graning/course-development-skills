@@ -1,6 +1,6 @@
 # Course Development Skills
 
-这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，覆盖从课题判断、目标设定、课程结构、内容组织、教学过程，到专家访谈和课后考试题生成的完整链路。
+这是一套用于企业培训课程开发的 Codex skills 和统筹 Agent，覆盖从课题判断、目标设定、课程结构、内容组织、教学过程，到专家访谈、学习评估和说课汇报的完整链路。
 
 它的核心原则是：课程开发必须从业务问题和学员工作场景出发，而不是从已有资料目录或讲师想讲的内容出发。每个 skill 都要求产出能追溯到课程目标、学员痛点、工作任务和可观察的学习证据。
 
@@ -13,9 +13,9 @@
 | 3 | `course-structure` | 结构搭建 | 把目标、任务和素材整理为清晰的课程模块、层级和逻辑顺序 | 一级/二级模块表、承接逻辑、内容取舍 |
 | 4 | `content-organization` | 内容组织 | 根据目标和结构筛选、归类、裁剪和排序课程内容 | 内容取舍表、内容分类表、模块内容组织表、案例/练习建议 |
 | 5 | `process-design` | 教学过程设计 | 把课程内容转化为可授课的流程、活动、时间分配、讲师/学员动作和学习衡量 | 总体流程、模块过程表、活动设计表、开场导入、讲师引导 |
-| 汇报 | `course-briefing` | 说课 | 面向评审专家、业务负责人、培训管理者或讲师团队说明课程设计逻辑和亮点 | 说课结构、完整说课稿、设计亮点、答辩准备 |
-| 支持 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
-| 评估 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
+| 6 | `expert-interview-outline` | 专家访谈提纲设计 | 从专家那里萃取课程所需经验、案例、难点、方法和工具素材 | 访谈提纲、STAR 追问话术、核心必问/拓展选问问题 |
+| 7 | `quiz-generation` | 试题生成 | 根据课程目标、核心内容和重难点生成课后考试题或随堂测试题 | 试卷说明、试题、答案解析、目标/知识点标注 |
+| 8 | `course-briefing` | 说课 | 面向评审专家、业务负责人、培训管理者或讲师团队说明课程设计逻辑和亮点 | 说课结构、完整说课稿、设计亮点、答辩准备 |
 
 ## Orchestrator Agent
 
@@ -37,9 +37,9 @@ workspace/course-development/{COURSE_ID}/
 ├── 03.course-structure.md
 ├── 04.content-organization.md
 ├── 05.process-design.md
-├── 06.course-briefing.md
-├── 07.expert-interview-outline.md
-├── 08.quiz-generation.md
+├── 06.expert-interview-outline.md
+├── 07.quiz-generation.md
+├── 08.course-briefing.md
 ├── lineage-map.md
 └── wip-notes.md
 ```
@@ -53,9 +53,9 @@ Agent 会按下面逻辑统筹：
 - 目标稳定但结构未定：调用 `$course-structure`
 - 已有结构和素材：调用 `$content-organization`
 - 内容稳定需要授课流程：调用 `$process-design`
-- 需要说课或课程评审汇报：调用 `$course-briefing`
 - 需要专家经验：调用 `$expert-interview-outline`
 - 需要学习评估：调用 `$quiz-generation`
+- 需要说课或课程评审汇报：调用 `$course-briefing`
 
 它不会机械调用全部 skill，而是根据当前任务选择最小但足够的组合；调用 skill 时也不会用自己的摘要替代 skill，而是以对应 `SKILL.md` 的完整规则为准。
 
@@ -64,7 +64,7 @@ Agent 会按下面逻辑统筹：
 建议按下面顺序开发一门课程：
 
 ```text
-课题分析 -> 目标设定 -> 结构搭建 -> 内容组织 -> 教学过程设计 -> 学习评估
+课题分析 -> 目标设定 -> 结构搭建 -> 内容组织 -> 教学过程设计 -> 学习评估 -> 说课汇报
 ```
 
 对应 skill：
@@ -75,8 +75,8 @@ $topic-analysis
   -> $course-structure
   -> $content-organization
   -> $process-design
-  -> $course-briefing
   -> $quiz-generation
+  -> $course-briefing
 ```
 
 如果课程内容依赖专家经验，在结构稳定后插入专家访谈：
@@ -211,7 +211,28 @@ $course-structure -> $expert-interview-outline -> $content-organization -> $proc
 Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 ```
 
-### 7. `$course-briefing`
+### 7. `$quiz-generation`
+
+用于生成课后考试题、随堂测试题、答案解析或题库内容。
+
+正式试卷需要输入：
+
+- 课程完整主题
+- 最终版课程目标
+- 核心教学内容与重难点
+- 学员高频易错点
+- 试卷题量、题型、分值和考试时长
+
+默认命题规则：
+
+- 核心知识点、关键技能点、高频易错点题量不少于 70%
+- 难度比例：基础 60%、进阶 30%、拔高 10%
+- 知识类目标用客观题检验记忆和理解
+- 技能类目标用案例题、情景题检验应用
+- 态度类目标用场景判断题检验认知和价值取向
+- 每题必须有答案、解析、对应目标/知识点和难度标注
+
+### 8. `$course-briefing`
 
 用于生成说课稿、课程设计汇报、课程评审说明或讲师试讲前说明。
 
@@ -232,27 +253,6 @@ Situation 情境 -> Task 任务 -> Action 行动 -> Result 结果
 ```
 
 它重点说明课程设计逻辑，不是复述课程目录。
-
-### 8. `$quiz-generation`
-
-用于生成课后考试题、随堂测试题、答案解析或题库内容。
-
-正式试卷需要输入：
-
-- 课程完整主题
-- 最终版课程目标
-- 核心教学内容与重难点
-- 学员高频易错点
-- 试卷题量、题型、分值和考试时长
-
-默认命题规则：
-
-- 核心知识点、关键技能点、高频易错点题量不少于 70%
-- 难度比例：基础 60%、进阶 30%、拔高 10%
-- 知识类目标用客观题检验记忆和理解
-- 技能类目标用案例题、情景题检验应用
-- 态度类目标用场景判断题检验认知和价值取向
-- 每题必须有答案、解析、对应目标/知识点和难度标注
 
 ## Common Use Cases
 
@@ -321,7 +321,7 @@ $course-objectives -> $content-organization -> $quiz-generation
 使用：
 
 ```text
-$topic-analysis -> $course-objectives -> $course-structure -> $content-organization -> $process-design -> $course-briefing
+$topic-analysis -> $course-objectives -> $course-structure -> $content-organization -> $process-design -> $quiz-generation -> $course-briefing
 ```
 
 确保说课能讲清课程背景、目标、结构、内容取舍、教学过程、评估闭环和设计亮点。
